@@ -1,0 +1,58 @@
+body {
+    text-align: center;
+}
+
+.container {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 0 auto;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    padding-left: -5px;
+    position: absolute;
+   
+}
+
+#tutorialButton{
+    background-color: rgb(56, 54, 54);
+    border: rgb(56, 54, 54);
+}
+
+#tutorialButton:hover{
+    background-color: rgb(148, 141, 141);
+    border: rgb(148, 141, 141);
+}
+
+#navbar{
+    background-color: rgb(56, 54, 54) !important;
+}
+
+a{
+    color: white !important;
+    font-weight: 50rem;
+}
+
+.pulse-button {
+    cursor: pointer;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+#logo{
+    height: 70px;
+}
+
+#nav-link{
+    font-weight: 30rem;
+}
