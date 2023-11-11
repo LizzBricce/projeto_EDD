@@ -32,7 +32,7 @@ PeachPuff = #FFDAB9 */
 body {
     text-align: center;
     font-family: 'font_pixel';
-    background: linear-gradient(to bottom, #f180c6, #FFA07A);
+    background: linear-gradient(to bottom, #9370DB, #FFDAB9);
 }
 
 .container {
@@ -107,7 +107,7 @@ a {
     width: 1000px;
     height: 600px;
     border-radius: 5px;
-    border: solid 10px pink;
+    border: solid 10px#9370DB;
 }
 
 #texto {
@@ -128,6 +128,7 @@ a {
 
 .falasTexto {
     font-size: 25px;
+    color: #5a2d0e;
 }
 
 .botoes {
