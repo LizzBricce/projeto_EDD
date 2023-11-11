@@ -1,88 +1,99 @@
-//http://www.bosontreinamentos.com.br/programacao-em-linguagem-c/como-implementar-uma-pilha-em-linguagem-c-usando-array/
 
-#include <stdio.h>
-#include <stdlib.h>
-
-// Definir o tamanho máximo da pilha
-#define TAM_MAX 100
-
-// Definir a estrutura da pilha
-struct pilha {
-    int topo; // índice do topo da pilha
-    int items[TAM_MAX]; // array para armazenar os itens da pilha
-};
-
-// Função que cria uma pilha vazia
-struct pilha* criar_pilha() {
-    struct pilha* nova_pilha = (struct pilha*) malloc(sizeof(struct pilha));
-    nova_pilha->topo = -1;
-    return nova_pilha;
-}
-
-// Função para verificar se a pilha está vazia
-int is_empty(struct pilha* pilha) {
-    return pilha->topo == -1;
-}
-
-// Função que verifica se a pilha está cheia
-int is_full(struct pilha* pilha) {
-    return pilha->topo == TAM_MAX - 1;
-}
-
-// Função para adicionar um item ao topo da pilha
-void push(struct pilha* pilha, int item) {
-    if (is_full(pilha)) {
-        printf("Erro: a pilha está cheia.\n");
+class Node {
+    constructor(data) {
+      this.data = data;
+      this.next = null;
     }
-    else {
-        pilha->topo++;
-        pilha->items[pilha->topo] = item;
+  }
+  
+  class LinkedList {
+    constructor() {
+      this.head = null;
     }
-}
-
-// Função para remover o item do topo da pilha
-int pop(struct pilha* pilha) {
-    if (is_empty(pilha)) {
-        printf("Erro: a pilha está vazia.\n");
-        return -1;
+  
+    // Função para inserir um novo elemento no final da lista
+    insert(data) {
+      const newNode = new Node(data);
+      if (!this.head) {
+        this.head = newNode;
+      } else {
+        let current = this.head;
+        while (current.next) {
+          current = current.next;
+        }
+        current.next = newNode;
+      }
     }
-    else {
-        int item_removido = pilha->items[pilha->topo];
-        pilha->topo--;
-        return item_removido;
+  
+    // Função para remover um elemento da lista
+    remove(data) {
+      if (!this.head) {
+        return;
+      }
+      if (this.head.data === data) {
+        this.head = this.head.next;
+        return;
+      }
+      let current = this.head;
+      let previous = null;
+      while (current && current.data !== data) {
+        previous = current;
+        current = current.next;
+      }
+      if (current) {
+        previous.next = current.next;
+      }
     }
-}
-
-// Função para retornar o item do topo da pilha sem removê-lo
-int peek(struct pilha* pilha) {
-    if (is_empty(pilha)) {
-        printf("Erro: a pilha está vazia.\n");
-        return -1;
+  
+    // Função para exibir todos os elementos da lista
+    displayAll() {
+      let current = this.head;
+      while (current) {
+        console.log(current.data);
+        current = current.next;
+      }
     }
-    else {
-        return pilha->items[pilha->topo];
-    }
-}
+  }
+  
+  // Seleciona todos os botões com a classe "botaoRespostas"
+  const falas = ["ai que nao sei oq nao sei oq la",
+   "*** ******* ******* ",
+    "uiuiuiuiu ", "Texto 4", 
+    ""];
+  let indiceFalaAtual = 0;
+  
+  // Seleciona a div com a classe "falas"
+  const divFalas = document.querySelector(".falas");
+  
+  // Seleciona todos os elementos h1 dentro da div
+  const elementosDeTexto = divFalas.querySelectorAll("h1");
+  
+  // Crie uma lista encadeada para armazenar os nomes dos botões clicados
+  const listaNomesClicados = new LinkedList();
+  
+  // Atualiza o texto da fala atual
+  function atualizarFala() {
+      elementosDeTexto[0].textContent = falas[indiceFalaAtual];
+  }
+  
+  // Adiciona um ouvinte de evento de clique para cada botão
+  const botoes = document.querySelectorAll(".botaoRespostas");
+  botoes.forEach(function(botao) {
+      botao.addEventListener("click", function() {
+          // Obtém o valor do atributo "data-nome" do botão clicado
+          const dataNome = botao.getAttribute("data-nome");
+          listaNomesClicados.insert(dataNome); // Adiciona o nome do botão à lista encadeada
+          console.log("Nomes dos botões clicados:");
+          listaNomesClicados.displayAll(); // Exibe todos os nomes dos botões clicados na lista
+          indiceFalaAtual++;
+          if (indiceFalaAtual >= falas.length) {
+              indiceFalaAtual = 0;
+          }
+          atualizarFala();
+      });
+  });
+  
+  // Atualiza o texto da fala inicial
+  atualizarFala();
 
-int main()
-{
-    struct pilha* minha_pilha = criar_pilha();
 
-    // Adicionar alguns itens à pilha
-    push(minha_pilha, 10);
-    push(minha_pilha, 20);
-    push(minha_pilha, 30);
-    push(minha_pilha, 40);
-    push(minha_pilha, 40);
-
-    // Mostrar o item atual do topo da pilha
-    printf("Item atual do topo: %d\n", peek(minha_pilha));
-
-    // Remover e imprimir o item do topo da pilha
-    printf("Item removido: %d\n", pop(minha_pilha));
-
-    // Mostrar o novo item atual do topo da pilha
-    printf("Item atual do topo: %d\n", peek(minha_pilha));
-
-    return 0;
-}
